@@ -53,3 +53,64 @@ var_dump($immutable->isImmutable());                 // bool(true)
 The library also provides CarbonInterface interface extends [DateTimeImmutable](http://www.php.net/manual/en/class.datetimeimmutable.php) and [JsonSerializable](http://www.php.net/manual/en/class.jsonserializable.php), [CarbonInterval](https://carbon.nesbot.com/docs/#api-interval) class extends [DateInterval](http://www.php.net/manual/en/class.dateinterval.php), [CarbonTimeZone](https://carbon.nesbot.com/docs/#api-timezone) class extends [DateTimeZone](http://www.php.net/manual/en/class.datetimezone.php) and [CarbonPeriod](https://carbon.nesbot.com/docs/#api-period) class polyfills [DatePeriod](http://www.php.net/manual/en/class.dateperiod.php).
 
 Carbon has all of the functions inherited from the base DateTime class. This approach allows you to access the base functionality such as [modify](http://php.net/manual/en/datetime.modify.php), [format](http://php.net/manual/en/datetime.format.php) or [diff](http://php.net/manual/en/datetime.diff.php).
+
+## Instantiation
+---
+There are several different methods available to create a new instance of Carbon. First there is a constructor. It overrides the [parent constructor](http://www.php.net/manual/en/datetime.construct.php) and you are best to read about the first parameter from the PHP manual and understand the date/time string formats it accepts. You'll hopefully find yourself rarely using the constructor but rather relying on the explicit static methods for improved readability.
+
+```php
+$carbon = new Carbon();                  // equivalent to Carbon::now()
+$carbon = new Carbon('first day of January 2008', 'America/Vancouver');
+echo get_class($carbon);                 // 'Carbon\Carbon'
+```
+
+You'll notice above that the timezone (2nd) parameter was passed as a string rather than a **\DateTimeZone** instance. All DateTimeZone parameters have been augmented so you can pass a DateTimeZone instance, string or integer offset to GMT and the timezone will be created for you. This is again shown in the next example which also introduces the **now()** function.
+
+```php
+$now = Carbon::now(); // will use timezone as set with date_default_timezone_set
+// PS: we recommend you to work with UTC as default timezone and only use
+// other timezones (such as the user timezone) on display
+
+$nowInLondonTz = Carbon::now(new DateTimeZone('Europe/London'));
+
+// or just pass the timezone as a string
+$nowInLondonTz = Carbon::now('Europe/London');
+echo $nowInLondonTz->tzName;             // Europe/London
+echo "\n";
+
+// or to create a date with a custom fixed timezone offset
+$date = Carbon::now('+13:30');
+echo $date->tzName;                      // +13:30
+echo "\n";
+
+// Get/set minutes offset from UTC
+echo $date->utcOffset();                 // 810
+echo "\n";
+
+$date->utcOffset(180);
+
+echo $date->tzName;                      // +03:00
+echo "\n";
+echo $date->utcOffset();                 // 180
+```
+
+If you really love your fluid method calls and get frustrated by the extra line or ugly pair of brackets necessary when using the constructor you'll enjoy the **parse** method.
+
+```php
+echo (new Carbon('first day of December 2008'))->addWeeks(2);     // 2008-12-15 00:00:00
+echo "\n";
+echo Carbon::parse('first day of December 2008')->addWeeks(2);    // 2008-12-15 00:00:00
+```
+
+The string passed to **Carbon::parse** or to **new Carbon** can represent a relative time (next sunday, tomorrow, first day of next month, last year) or an absolute time (first day of December 2008, 2017-01-06). You can test if a string will produce a relative or absolute date with **Carbon::hasRelativeKeywords()**.
+
+```php
+$string = 'first day of next month';
+if (strtotime($string) === false) {
+    echo "'$string' is not a valid date/time string.";
+} elseif (Carbon::hasRelativeKeywords($string)) {
+    echo "'$string' is a relative valid date/time string, it will returns different dates depending on the current date.";
+} else {
+    echo "'$string' is an absolute date/time string, it will always returns the same date.";
+}
+```
