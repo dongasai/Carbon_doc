@@ -549,3 +549,351 @@ Here is the complete list of available replacements (examples given with `$date 
 |zz	|UTC	| Time zone name|
 |Z	|+00:00	| Time zone offset HH:mm|
 |ZZ	|+0000	| Time zone offset HHmm|
+
+Some macro-formats are also available. Here are examples of each in some languages:
+
+
+<table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <td>
+            <code>LT</code><br>
+        </td>
+        <td>
+            <span class="doc-comment">h:mm A</span><br>
+            5:04 PM
+        </td>
+        <td>
+            <span class="doc-comment">HH:mm</span><br>
+            17:04
+        </td>
+        <td>
+            <span class="doc-comment">HH:mm</span><br>
+            17:04
+        </td>
+        <td>
+            <span class="doc-comment">H:mm</span><br>
+            17:04
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>LTS</code><br>
+        </td>
+        <td>
+            <span class="doc-comment">h:mm:ss A</span> <br>
+            5:04:05 PM
+        </td>
+        <td>
+            <span class="doc-comment">HH:mm:ss</span><br>
+            17:04:05
+        </td>
+        <td>
+            <span class="doc-comment">HH:mm:ss</span><br>
+            17:04:05
+        </td>
+        <td>
+            <span class="doc-comment">H:mm:ss</span><br>
+            17:04:05
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>L</code><br>
+            <br><code>l</code>
+        </td>
+        <td>
+            <span class="doc-comment">MM/DD/YYYY</span><br>
+            01/05/2017
+            <br>1/5/2017
+        </td>
+        <td>
+            <span class="doc-comment">DD/MM/YYYY</span><br>
+            05/01/2017
+            <br>5/1/2017
+        </td>
+        <td>
+            <span class="doc-comment">YYYY/MM/DD</span><br>
+            2017/01/05
+            <br>2017/1/5
+        </td>
+        <td>
+            <span class="doc-comment">DD.MM.YYYY</span><br>
+            05.01.2017
+            <br>5.1.2017
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>LL</code><br>
+            <br><code>ll</code>
+        </td>
+        <td>
+            <span class="doc-comment">MMMM D, YYYY</span><br>
+            January 5, 2017
+            <br>Jan 5, 2017
+        </td>
+        <td>
+            <span class="doc-comment">D MMMM YYYY</span><br>
+            5 janvier 2017
+            <br>5 janv. 2017
+        </td>
+        <td>
+            <span class="doc-comment">YYYY年M月D日</span><br>
+            2017年1月5日
+            <br>2017年1月5日
+        </td>
+        <td>
+            <span class="doc-comment">D. MMMM YYYY</span><br>
+            5. siječanj 2017
+            <br>5. sij. 2017
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>LLL</code><br>
+            <br><code>lll</code>
+        </td>
+        <td>
+            <span class="doc-comment">MMMM D, YYYY h:mm A</span><br>
+            January 5, 2017 5:04 PM
+            <br>Jan 5, 2017 5:04 PM
+        </td>
+        <td>
+            <span class="doc-comment">D MMMM YYYY HH:mm</span><br>
+            5 janvier 2017 17:04
+            <br>5 janv. 2017 17:04
+        </td>
+        <td>
+            <span class="doc-comment">YYYY年M月D日 HH:mm</span><br>
+            2017年1月5日 17:04
+            <br>2017年1月5日 17:04
+        </td>
+        <td>
+            <span class="doc-comment">D. MMMM YYYY H:mm</span><br>
+            5. siječanj 2017 17:04
+            <br>5. sij. 2017 17:04
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>LLLL</code><br>
+            <br><code>llll</code>
+        </td>
+        <td>
+            <span class="doc-comment">dddd, MMMM D, YYYY h:mm A</span><br>
+            Thursday, January 5, 2017 5:04 PM
+            <br>Thu, Jan 5, 2017 5:04 PM
+        </td>
+        <td>
+            <span class="doc-comment">dddd D MMMM YYYY HH:mm</span><br>
+            jeudi 5 janvier 2017 17:04
+            <br>jeu. 5 janv. 2017 17:04
+        </td>
+        <td>
+            <span class="doc-comment">YYYY年M月D日 dddd HH:mm</span><br>
+            2017年1月5日 木曜日 17:04
+            <br>2017年1月5日 木 17:04
+        </td>
+        <td>
+            <span class="doc-comment">dddd, D. MMMM YYYY H:mm</span><br>
+            četvrtak, 5. siječanj 2017 17:04
+            <br>čet., 5. sij. 2017 17:04
+        </td>
+    </tr>
+</table>
+
+When you use macro-formats with `createFromIsoFormat` you can specify a locale to select which language the macro-format should be searched in.
+```php
+$date = Carbon::createFromIsoFormat('LLLL', 'Monday 11 March 2019 16:28', null, 'fr');
+echo $date->isoFormat('M/D/YY HH:mm'); // 3/11/19 16:28
+```
+An other usefull translated method is `calendar($referenceTime = null, array $formats = []): string:`
+
+```php
+$date = CarbonImmutable::now();
+echo $date->calendar();                                      // Today at 2:49 PM
+echo "\n";
+echo $date->sub('1 day 3 hours')->calendar();                // Yesterday at 11:49 AM
+echo "\n";
+echo $date->sub('3 days 10 hours 23 minutes')->calendar();   // Last Friday at 4:26 AM
+echo "\n";
+echo $date->sub('8 days')->calendar();                       // 10/06/2019
+echo "\n";
+echo $date->add('1 day 3 hours')->calendar();                // Tomorrow at 5:49 PM
+echo "\n";
+echo $date->add('3 days 10 hours 23 minutes')->calendar();   // Friday at 1:12 AM
+echo "\n";
+echo $date->add('8 days')->calendar();                       // 10/22/2019
+echo "\n";
+echo $date->locale('fr')->calendar();                        // Aujourd’hui à 14:49
+```
+If you know momentjs, then it works the same way. You can pass a reference date as second argument, else now is used. And you can customize one or more formats using the second argument (formats to pass as array keys are: sameDay, nextDay, nextWeek, lastDay, lastWeek and sameElse):
+
+```php
+$date1 = CarbonImmutable::parse('2018-01-01 12:00:00');
+$date2 = CarbonImmutable::parse('2018-01-02 8:00:00');
+
+echo $date1->calendar($date2, [
+    'lastDay' => '[Previous day at] LT',
+]);
+// Previous day at 12:00 PM
+```
+[Click here](https://carbon.nesbot.com/docs/#supported-locales)is an overview of the 281 locales (and 824 regional variants) supported by the last Carbon version:
+
+If you can add missing translations or missing languages, [please go to translation tool](https://carbon.nesbot.com/contribute/translate/), your help is welcome.
+
+Note that if you use Laravel 5.5+, the locale will be automatically set according to current last `App:setLocale` execution. So `diffForHumans`, `isoFormat`, `translatedFormat` and localized properties such as `->dayName` or `->monthName` will be localized transparently.
+
+Each Carbon, CarbonImmutable, CarbonInterval or CarbonPeriod instance is linked by default to a `Carbon\Translator` instance according to its locale set. You can get and/or change it using `getLocalTranslator()/setLocalTranslator(Translator $translator)`.
+
+If you prefer the `date()` [pattern](https://php.net/manual/en/function.date.php), you can use `translatedFormat()` which works like `format()` but translate the string using the current locale.
+
+```php
+$date = Carbon::parse('2018-03-16 15:45')->locale('uk');
+
+echo $date->translatedFormat('g:i a l jS F Y'); // 3:45 дня п’ятниця 16-го березня 2018
+```
+
+Be warned that some letters like `W` are not supported because they are not safely `translatable` and translatedFormat offers shorter syntax but less possibilities than `isoFormat()`.
+
+You can customize the behavior of the `format()` method to use any other method or a custom one instead of the native method from the PHP DateTime class:
+
+```php
+$date = Carbon::parse('2018-03-16 15:45')->locale('ja');
+
+echo $date->format('g:i a l jS F Y');    // 3:45 pm Friday 16th March 2018
+echo "\n";
+
+$date->settings(['formatFunction' => 'translatedFormat']);
+
+echo $date->format('g:i a l jS F Y');    // 3:45 午後 金曜日 16日 3月 2018
+echo "\n";
+
+$date->settings(['formatFunction' => 'isoFormat']);
+
+echo $date->format('LL');                // 2018年3月16日
+echo "\n";
+
+// When you set a custom format() method you still can access the native method using rawFormat()
+echo $date->rawFormat('D');              // Fri
+```
+
+You can translate a string from a language to an other using dates translations available in Carbon:
+
+```php
+echo Carbon::translateTimeString('mercredi 8 juillet', 'fr', 'nl');
+// woensdag 8 juli
+echo "\n";
+
+// You can select translations to use among available constants:
+// - CarbonInterface::TRANSLATE_MONTHS
+// - CarbonInterface::TRANSLATE_DAYS
+// - CarbonInterface::TRANSLATE_UNITS
+// - CarbonInterface::TRANSLATE_MERIDIEM
+// - CarbonInterface::TRANSLATE_ALL (all above)
+// You can combine them with pipes: like below (translate units and days but not months and meridiem):
+echo Carbon::translateTimeString('mercredi 8 juillet + 3 jours', 'fr', 'nl', CarbonInterface::TRANSLATE_DAYS | CarbonInterface::TRANSLATE_UNITS);
+// woensdag 8 juillet + 3 dagen
+```
+
+If input locale is not specified, `Carbon::getLocale()` is used instead. If output locale is not specified, `"en"` is used instead. You also can translate using the locale of the instance with:
+
+```php
+echo Carbon::now()->locale('fr')->translateTimeStringTo('mercredi 8 juillet + 3 jours', 'nl');
+// woensdag 8 juli + 3 dagen
+```
+
+You can use strings in any language directly to create a date object with `parseFromLocale`:
+
+```php
+$date = Carbon::parseFromLocale('mercredi 6 mars 2019 + 3 jours', 'fr', 'UTC'); // timezone is optional
+
+echo $date->isoFormat('LLLL'); // Saturday, March 9, 2019 12:00 AM
+```
+Or with custom format using `createFromLocaleFormat` (use the `date()` pattern for replacements):
+
+```php
+$date = Carbon::createFromLocaleIsoFormat('!DD/MMMM/YY', 'fr', '25/Août/19', 'Europe/Paris'); // timezone is optional
+
+echo $date->isoFormat('LLLL'); // Sunday, August 25, 2019 12:00 AM
+```
+
+To get some interesting info about languages (such as complete ISO name or native name, region (for example to be displayed in a languages selector), you can use `getAvailableLocalesInfo`.
+
+```php
+$zhTwInfo = Carbon::getAvailableLocalesInfo()['zh_TW'];
+$srCyrlInfo = Carbon::getAvailableLocalesInfo()['sr_Cyrl'];
+$caInfo = Carbon::getAvailableLocalesInfo()['ca'];
+
+var_dump($zhTwInfo->getId());                      // string(5) "zh_TW"
+var_dump($zhTwInfo->getNames());                  
+/*
+array(2) {
+  ["isoName"]=>
+  string(7) "Chinese"
+  ["nativeName"]=>
+  string(38) "中文 (Zhōngwén), 汉语, 漢語"
+}
+*/
+var_dump($zhTwInfo->getCode());                    // string(2) "zh"
+var_dump($zhTwInfo->getVariant());                 // NULL
+var_dump($srCyrlInfo->getVariant());               // string(4) "Cyrl"
+var_dump($zhTwInfo->getVariantName());             // NULL
+var_dump($srCyrlInfo->getVariantName());           // string(8) "Cyrillic"
+var_dump($zhTwInfo->getRegion());                  // string(2) "TW"
+var_dump($srCyrlInfo->getRegion());                // NULL
+var_dump($zhTwInfo->getRegionName());              // string(25) "Taiwan, Province of China"
+var_dump($srCyrlInfo->getRegionName());            // NULL
+var_dump($zhTwInfo->getFullIsoName());             // string(7) "Chinese"
+var_dump($caInfo->getFullIsoName());               // string(18) "Catalan, Valencian"
+var_dump($zhTwInfo->getFullNativeName());          // string(38) "中文 (Zhōngwén), 汉语, 漢語"
+var_dump($caInfo->getFullNativeName());            // string(18) "català, valencià"
+var_dump($zhTwInfo->getIsoName());                 // string(7) "Chinese"
+var_dump($caInfo->getIsoName());                   // string(7) "Catalan"
+var_dump($zhTwInfo->getNativeName());              // string(20) "中文 (Zhōngwén)"
+var_dump($caInfo->getNativeName());                // string(7) "català"
+var_dump($zhTwInfo->getIsoDescription());          // string(35) "Chinese (Taiwan, Province of China)"
+var_dump($srCyrlInfo->getIsoDescription());        // string(18) "Serbian (Cyrillic)"
+var_dump($caInfo->getIsoDescription());            // string(7) "Catalan"
+var_dump($zhTwInfo->getNativeDescription());       // string(48) "中文 (Zhōngwén) (Taiwan, Province of China)"
+var_dump($srCyrlInfo->getNativeDescription());     // string(34) "српски језик (Cyrillic)"
+var_dump($caInfo->getNativeDescription());         // string(7) "català"
+var_dump($zhTwInfo->getFullIsoDescription());      // string(35) "Chinese (Taiwan, Province of China)"
+var_dump($srCyrlInfo->getFullIsoDescription());    // string(18) "Serbian (Cyrillic)"
+var_dump($caInfo->getFullIsoDescription());        // string(18) "Catalan, Valencian"
+var_dump($zhTwInfo->getFullNativeDescription());   // string(66) "中文 (Zhōngwén), 汉语, 漢語 (Taiwan, Province of China)"
+var_dump($srCyrlInfo->getFullNativeDescription()); // string(34) "српски језик (Cyrillic)"
+var_dump($caInfo->getFullNativeDescription());     // string(18) "català, valencià"
+
+$srCyrlInfo->setIsoName('foo, bar')->setNativeName('biz, baz');
+var_dump($srCyrlInfo->getIsoName());               // string(3) "foo"
+var_dump($srCyrlInfo->getFullIsoName());           // string(8) "foo, bar"
+var_dump($srCyrlInfo->getFullIsoDescription());    // string(19) "foo, bar (Cyrillic)"
+var_dump($srCyrlInfo->getNativeName());            // string(3) "biz"
+var_dump($srCyrlInfo->getFullNativeName());        // string(8) "biz, baz"
+var_dump($srCyrlInfo->getFullNativeDescription()); // string(19) "biz, baz (Cyrillic)"
+
+// You can also access directly regions/languages lists:
+var_dump(\Carbon\Language::all()['zh']);          
+/*
+array(2) {
+  ["isoName"]=>
+  string(7) "Chinese"
+  ["nativeName"]=>
+  string(38) "中文 (Zhōngwén), 汉语, 漢語"
+}
+*/
+var_dump(\Carbon\Language::regions()['TW']);      
+/*
+string(25) "Taiwan, Province of China"
+*/
+
+```
+
+Please let me thank some projects that helped us a lot to support more locales, and internationalization features:
+
+* [jenssegers/date](https://github.com/jenssegers/date): many features were in this project that extends Carbon before being in Carbon itself.
+* [momentjs](https://momentjs.com/): many features are inspired by momentjs and made to be compatible with this front-side pair project.
+* [glibc](https://www.gnu.org/software/libc/) was a strong base for adding and checking languages.
+* [svenfuchs/rails-i18n](https://github.com/svenfuchs/rails-i18n) also helped to add and check languages.
+* We used [glosbe.com](https://glosbe.com/) a lot to check translations and fill blanks.
