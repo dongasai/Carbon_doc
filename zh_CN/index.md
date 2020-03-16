@@ -44,7 +44,7 @@
 
 [Carbon迭代处理](carbonPeriod.md "CarbonPeriod")
 
-[Carbon时区](json.md "CarbonTimeZone")
+[Carbon时区](CarbonTimeZone.md "CarbonTimeZone")
 
 [升级到 Carbon 2](carbon2.md "Migrate to Carbon 2")
 
