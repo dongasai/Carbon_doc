@@ -44,7 +44,7 @@
 
 [CarbonPeriod](carbonPeriod.md "CarbonPeriod")
 
-[CarbonTimeZone](json.md "CarbonTimeZone")
+[CarbonTimeZone](CarbonTimeZone.md "CarbonTimeZone")
 
 [Migrate to Carbon 2](carbon2.md "Migrate to Carbon 2")
 

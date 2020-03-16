@@ -1,0 +1,16 @@
+{
+    "src":{
+        "dir":"en",
+        "title":"英文"
+    },
+    "list":{
+        "zh_CN":{
+            "dir":"zh_CN",
+            "title":"中文简体"
+        },
+        "zh_CHT":{
+            "dir":"zh_CHT",
+            "title":"傳統中文(中文繁體)"
+        }
+    }
+}
