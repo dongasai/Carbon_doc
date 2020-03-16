@@ -1,0 +1,7 @@
+filters:
+  - filter_type: dir
+    file_format: MD
+    source_language: en
+    source_file_extension: md
+    source_file_dir: en
+    translation_files_expression: '<lang>'
