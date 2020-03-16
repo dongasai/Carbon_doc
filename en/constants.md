@@ -1,6 +1,7 @@
 # Constants
 
 The following constants are defined in the Carbon class.
+
 ```php
 // These getters specifically return integers, ie intval()
 var_dump(Carbon::SUNDAY);                          // int(0)
