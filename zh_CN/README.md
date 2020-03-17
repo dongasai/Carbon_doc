@@ -9,8 +9,5 @@ Carbon doc
 
 transifex https://www.transifex.com/carbon/public/ 预计使用这个工具进行翻译
 
-- [introduction](zh_CN/introduction.md)
-
-[Gitee 码云 Pages](https://dongasai.gitee.io/carbon_doc/#/)
-
+introduction
 
