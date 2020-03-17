@@ -53,3 +53,21 @@ var_dump($immutable->isImmutable());                 // bool(true)
 The library also provides CarbonInterface interface extends [DateTimeImmutable](http://www.php.net/manual/en/class.datetimeimmutable.php) and [JsonSerializable](http://www.php.net/manual/en/class.jsonserializable.php), [CarbonInterval](https://carbon.nesbot.com/docs/#api-interval) class extends [DateInterval](http://www.php.net/manual/en/class.dateinterval.php), [CarbonTimeZone](https://carbon.nesbot.com/docs/#api-timezone) class extends [DateTimeZone](http://www.php.net/manual/en/class.datetimezone.php) and [CarbonPeriod](https://carbon.nesbot.com/docs/#api-period) class polyfills [DatePeriod](http://www.php.net/manual/en/class.dateperiod.php).
 
 Carbon has all of the functions inherited from the base DateTime class. This approach allows you to access the base functionality such as [modify](http://php.net/manual/en/datetime.modify.php), [format](http://php.net/manual/en/datetime.format.php) or [diff](http://php.net/manual/en/datetime.diff.php).
+
+Now, let see how cool is this doc. Click on the code below:
+
+```php
+$dtToronto = Carbon::create(2012, 1, 1, 0, 0, 0, 'America/Toronto');
+$dtVancouver = Carbon::create(2012, 1, 1, 0, 0, 0, 'America/Vancouver');
+// Try to replace the 4th number (hours) or the last argument (timezone) with
+// Europe/Paris for example and see the actual result on the right hand.
+// It's alive!
+
+echo $dtVancouver->diffInHours($dtToronto); // 3
+// Now, try to double-click on "diffInHours" or "create" to open
+// the References panel.
+// Once the references panel is open, you can use the search field to
+// filter the list or click the (<) button to close it.
+```
+
+Some examples are static snippets, some other are editable (when there is a top right hand corner expand button). You can also click on this button to open the snippet in a new tab. You can double-click on methods name in both static and dynamic examples.

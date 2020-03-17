@@ -7,9 +7,10 @@ There are several different methods available to create a new instance of Carbon
 $carbon = new Carbon();                  // equivalent to Carbon::now()
 $carbon = new Carbon('first day of January 2008', 'America/Vancouver');
 echo get_class($carbon);                 // 'Carbon\Carbon'
+$carbon = new Carbon(new DateTime('first day of January 2008'), new DateTimeZone('America/Vancouver')); // equivalent to previous instance
 ```
 
-You'll notice above that the timezone (2nd) parameter was passed as a string rather than a **\DateTimeZone** instance. All DateTimeZone parameters have been augmented so you can pass a DateTimeZone instance, string or integer offset to GMT and the timezone will be created for you. This is again shown in the next example which also introduces the **now()** function.
+You'll notice above that the timezone (2nd) parameter was passed as a string rather than a `\DateTimeZone` instance. All DateTimeZone parameters have been augmented so you can pass a DateTimeZone instance, string or integer offset to GMT and the timezone will be created for you. This is again shown in the next example which also introduces the `now()` function.
 
 ```php
 $now = Carbon::now(); // will use timezone as set with date_default_timezone_set
@@ -39,7 +40,7 @@ echo "\n";
 echo $date->utcOffset();                 // 180
 ```
 
-If you really love your fluid method calls and get frustrated by the extra line or ugly pair of brackets necessary when using the constructor you'll enjoy the **parse** method.
+If you really love your fluid method calls and get frustrated by the extra line or ugly pair of brackets necessary when using the constructor you'll enjoy the `parse` method.
 
 ```php
 echo (new Carbon('first day of December 2008'))->addWeeks(2);     // 2008-12-15 00:00:00
@@ -47,7 +48,7 @@ echo "\n";
 echo Carbon::parse('first day of December 2008')->addWeeks(2);    // 2008-12-15 00:00:00
 ```
 
-The string passed to **Carbon::parse** or to **new Carbon** can represent a relative time (next sunday, tomorrow, first day of next month, last year) or an absolute time (first day of December 2008, 2017-01-06). You can test if a string will produce a relative or absolute date with **Carbon::hasRelativeKeywords()**.
+The string passed to `Carbon::parse` or to `new Carbon` can represent a relative time (next sunday, tomorrow, first day of next month, last year) or an absolute time (first day of December 2008, 2017-01-06). You can test if a string will produce a relative or absolute date with `Carbon::hasRelativeKeywords()`.
 
 ```php
 $string = 'first day of next month';
@@ -60,7 +61,7 @@ if (strtotime($string) === false) {
 }
 ```
 
-To accompany **now()**, a few other static instantiation helpers exist to create widely known instances. The only thing to really notice here is that **today()**, **tomorrow()** and **yesterday()**, besides behaving as expected, all accept a timezone parameter and each has their time value set to **00:00:00**.
+To accompany `now()`, a few other static instantiation helpers exist to create widely known instances. The only thing to really notice here is that `today()`, `tomorrow()` and `yesterday()`, besides behaving as expected, all accept a timezone parameter and each has their time value set to `00:00:00`.
 
 ```php
 $now = Carbon::now();
@@ -76,7 +77,7 @@ $yesterday = Carbon::yesterday();
 echo $yesterday;                         // 2019-10-13 00:00:00
 ```
 
-The next group of static helpers are the **createXXX()** helpers. Most of the static **create** functions allow you to provide as many or as few arguments as you want and will provide default values for all others. Generally default values are the current date, time or timezone. Higher values will wrap appropriately but invalid values will throw an **InvalidArgumentException** with an informative message. The message is obtained from an [DateTime::getLastErrors()](http://php.net/manual/en/datetime.getlasterrors.php) call.
+The next group of static helpers are the `createXXX()` helpers. Most of the static `create` functions allow you to provide as many or as few arguments as you want and will provide default values for all others. Generally default values are the current date, time or timezone. Higher values will wrap appropriately but invalid values will throw an `InvalidArgumentException` with an informative message. The message is obtained from an [DateTime::getLastErrors()](http://php.net/manual/en/datetime.getlasterrors.php) call.
 
 ```php
 $year = 2000; $month = 4; $day = 19;
@@ -88,7 +89,7 @@ echo Carbon::createFromTimeString("$hour:$minute:$second", $tz)."\n";
 echo Carbon::create($year, $month, $day, $hour, $minute, $second, $tz)."\n";
 ```
 
-**createFromDate()** will default the time to now. **createFromTime()** will default the date to today. **create()** will default any null parameter to the current respective value. As before, the $tz defaults to the current timezone and otherwise can be a DateTimeZone instance or simply a string timezone value. The only special case is for **create()** that has minimum value as default for missing argument but default on current value when you pass explicitly **null**.
+`createFromDate()` will default the time to now. `createFromTime()` will default the date to today. `create()` will default any null parameter to the current respective value. As before, the $tz defaults to the current timezone and otherwise can be a DateTimeZone instance or simply a string timezone value. The only special case is for `create()` that has minimum value as default for missing argument but default on current value when you pass explicitly `null`.
 
 ```php
 $xmasThisYear = Carbon::createFromDate(null, 12, 25);  // Year defaults to current year
@@ -108,7 +109,7 @@ Carbon::createFromDate(2019, 4); // 2019-05-01
 // That's why you simply should not use Carbon::createFromDate() with only 2 parameters (1 or 3 are safe, but no 2)
 ```
 
-Create exceptions occurs on such negative values but not on overflow, to get exceptions on overflow, use **createSafe()**
+Create exceptions occurs on such negative values but not on overflow, to get exceptions on overflow, use `createSafe()`
 
 ```php
 echo Carbon::create(2000, 1, 35, 13, 0, 0);

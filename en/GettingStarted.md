@@ -73,3 +73,4 @@ kylekatarnls
 https://github.com/kylekatarnls
 
 ## Contributors
+![contributors](https://opencollective.com/Carbon/contributors.svg?width=890&button=false)
