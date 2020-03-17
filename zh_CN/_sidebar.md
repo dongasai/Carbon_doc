@@ -22,6 +22,10 @@
 
 - [Conversion](zh_CN/conversion.md "Conversion")
 
+- [Addition and Subtraction](zh_CN/addition_and_ubtraction.md "Addition and Subtraction")
+
+- [Conversion](zh_CN/conversion.md "Conversion")
+
 - [Comparison](zh_CN/comparison.md "Comparison")
 
 - [Addition and Subtraction](zh_CN/addition_and_ubtraction.md "Addition and Subtraction")

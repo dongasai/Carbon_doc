@@ -6,7 +6,7 @@
 
 The easiest and recommended method to install Carbon is via [composer](http://getcomposer.org/).
 
-## [With composer](#withcomposer) [Direct download](#directdownload)
+## [With composer](#withcomposer) 
 
 <a name="withcomposer">With composer</a>
 
