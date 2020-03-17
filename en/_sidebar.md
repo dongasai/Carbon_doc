@@ -28,6 +28,10 @@
 
 - [Difference](en/difference.md "Difference")
 
+- [Difference for Humans](en/DifferenceforHumans.md "Difference for Humans")
+
+- [Modifiers](en/Modifiers.md "Modifiers")
+
 - [Constants](en/constants.md "Constants")
 
 - [Serialization](en/serialization.md "Serialization")
