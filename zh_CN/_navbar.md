@@ -1,0 +1,3 @@
+- Translations
+  - [:us: English](/en/)
+  - [:cn: 中文](/zh_CN/)
