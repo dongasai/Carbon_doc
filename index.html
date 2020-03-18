@@ -19,11 +19,19 @@
   <script>
     window.$docsify = {
       name: 'Corbon doc',
-      repo: '',
+      repo: 'https://github.com/dongasai/Carbon_doc',
+      search: 'auto', // default
+      logo: '/_media/logo.png',
+      autoHeader: true,// 自动设置标题
       loadSidebar: true,
       subMaxLevel: 3,
       coverpage: true,
       loadNavbar: true,
+      // fallbackLanguages: ['en', 'zh_CN'],
+      notFoundPage: {
+        '/en': 'en/404.md',
+        '/zh_CN': 'zh_CN/404.md',
+      },
       alias: {
         '/.*/_navbar.md': '/_navbar.md',
         '/en/_sidebar.md': '/_sidebar.md'
@@ -31,6 +39,11 @@
     }
   </script>
   <script src="./docsify.js"></script>
+  <script src="./search.min.js"></script>
+  <script src="./prism-bash.min.js"></script>
+  <script src="./prism-php.min.js"></script>
+  <script src="./prism-javascript.min.js"></script>
+
 </body>
 
 </html>

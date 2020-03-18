@@ -5583,14 +5583,14 @@
       }
 
       var local = path.split('/')[1];
-
+     
       if (fallbackLanguages.indexOf(local) === -1) {
         return false;
       }
 
       var newPath = path.replace(new RegExp(("^/" + local)), '');
       var req = request(newPath + qs, true, requestHeaders);
-
+      console.log(5586,newPath);
       req.then(
         function (text, opt) { return this$1._renderMain(
             text,

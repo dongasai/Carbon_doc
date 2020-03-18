@@ -1,10 +1,10 @@
-- [Introduction](en/introduction.md "Introduction")
+- [Introduction](introduction.md "Introduction")
 
-- [Instantiation](en/instantiation.md "Instantiation")
+- [Instantiation](instantiation.md "Instantiation")
 
-- [Localization](en/localization.md "Localization")
+- [Localization](localization.md "Localization")
 
-- [Testing Aids](en/testing-aids.md "Testing Aids")
+- [Testing Aids](testing-aids.md "Testing Aids")
 
 - [Getters](en/getters.md "Getters")
 
